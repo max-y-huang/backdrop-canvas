@@ -1,7 +1,7 @@
 <script>
   const fs = require("fs");
   const path = require("path");
-  const tilesetData = require("../game/config/tilesets.json");
+  const tilesetData = require("../config/tilesets.json");
 
   import P5 from "p5-svelte";
   import { selectedTileIndex } from "./stores.js";
@@ -75,16 +75,10 @@
         tiles: list,
       };
 
-      fs.writeFile(
-        path.join(__dirname, "../game/config/maps.json"),
-        JSON.stringify(data),
-        (error) => {
-          if (error) {
-            console.log(error);
-          }
-        }
+      fs.writeFileSync(
+        path.join(__dirname, process.env.GAME_DIR, "config/maps.json"),
+        JSON.stringify(data)
       );
-      // console.log(list);
     }
   }
 
@@ -173,7 +167,11 @@
       let tileData = tilesetData["dungeon"][selectedIndex];
       if (mouseOver()) {
         p5.loadImage(
-          path.join(__dirname, "../game", tileData["spritesheetSrc"]),
+          path.join(
+            __dirname,
+            process.env.GAME_DIR,
+            tileData["spritesheetSrc"]
+          ),
           (image) => {
             mapData.addTile({
               x: cursorX(),

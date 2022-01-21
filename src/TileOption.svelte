@@ -14,7 +14,7 @@
     p5.setup = () => {
       p5.createCanvas(48, 48);
       image = p5.loadImage(
-        path.join(__dirname, "../game", data["spritesheetSrc"])
+        path.join(__dirname, process.env.GAME_DIR, data["spritesheetSrc"])
       );
     };
 

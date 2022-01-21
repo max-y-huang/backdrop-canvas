@@ -1,6 +1,8 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+require('dotenv').config()
+
 // Live Reload
 require('electron-reload')(__dirname, {
   electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
@@ -18,7 +20,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1080,
     height: 720,
-    autoHideMenuBar: true,
+    // autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true
     }

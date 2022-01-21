@@ -1,5 +1,5 @@
 <script>
-  const tilesetData = require("../game/config/tilesets.json");
+  const tilesetData = require("../config/tilesets.json");
 
   import TileOption from "./TileOption.svelte";
 
