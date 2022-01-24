@@ -1,10 +1,11 @@
 <script>
-  const fs = require("fs");
   const path = require("path");
-  const tilesetData = require("../config/tilesets.json");
+  import { requireConfigJSON, writeJSON } from "./json.js";
 
   import P5 from "p5-svelte";
   import { selectedTileIndex } from "./stores.js";
+
+  const tilesetData = requireConfigJSON("tilesets");
 
   class MapData {
     constructor(p5, width, height) {
@@ -75,7 +76,7 @@
         tiles: list,
       };
 
-      fs.writeFileSync(
+      writeJSON(
         path.join(__dirname, process.env.GAME_DIR, "config/maps.json"),
         JSON.stringify(data)
       );

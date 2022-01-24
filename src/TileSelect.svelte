@@ -1,7 +1,9 @@
 <script>
-  const tilesetData = require("../config/tilesets.json");
+  import { requireConfigJSON } from "./json.js";
 
   import TileOption from "./TileOption.svelte";
+
+  const tilesetData = requireConfigJSON("tilesets");
 
   export let tileset;
 
