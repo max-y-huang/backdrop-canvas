@@ -1,3 +1,9 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
-export const selectedTileIndex = writable(0);
+const _workingPath = writable(undefined);
+const _tilesetData = writable([]);
+const _tileImageSrcs = writable([]);
+
+const selectedTileIndex = writable(0);
+
+export { _workingPath, _tilesetData, _tileImageSrcs, selectedTileIndex };

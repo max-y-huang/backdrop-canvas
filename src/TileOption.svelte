@@ -1,30 +1,37 @@
 <script>
-  const path = require("path");
-
+  import { _tileImageSrcs } from "./stores";
   import P5 from "p5-svelte";
   import { selectedTileIndex } from "./stores.js";
 
   export let index;
-  export let data;
   let selected;
+  let prevImageSrc, imageSrc;
 
   const sketch = (p5) => {
     let image;
 
     p5.setup = () => {
       p5.createCanvas(48, 48);
-      image = p5.loadImage(
-        path.join(__dirname, process.env.GAME_DIR, data["spritesheetSrc"])
-      );
     };
 
     p5.draw = () => {
+      refreshImage();
       p5.image(image.get(0, 0, 48, 48), 0, 0);
+    };
+
+    const refreshImage = () => {
+      if (imageSrc !== prevImageSrc) {
+        image = p5.loadImage(imageSrc);
+        prevImageSrc = imageSrc;
+      }
     };
   };
 
   selectedTileIndex.subscribe((value) => {
     selected = value == index;
+  });
+  _tileImageSrcs.subscribe((value) => {
+    imageSrc = value[index];
   });
 </script>
 

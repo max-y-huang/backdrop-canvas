@@ -1,16 +1,14 @@
 <script>
-  import { requireConfigJSON } from "./json.js";
-
   import TileOption from "./TileOption.svelte";
+  import { _tilesetData } from "./stores";
 
-  const tilesetData = requireConfigJSON("tilesets");
+  let tileOptions = [];
 
-  export let tileset;
-
-  let tileOptions = tilesetData[tileset].map((option, i) => ({
-    index: i,
-    data: option,
-  }));
+  _tilesetData.subscribe((value) => {
+    tileOptions = value.map((option, i) => ({
+      index: i,
+    }));
+  });
 </script>
 
 <div class="wrapper">
@@ -37,8 +35,6 @@
   .wrapper > div > div {
     display: grid;
     grid-template-columns: repeat(4, auto);
-    /* row-gap: 2px;
-    column-gap: 2px; */
     padding: 6px;
   }
 </style>
