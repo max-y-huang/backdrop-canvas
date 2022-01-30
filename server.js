@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { spawn } = require("child_process");
 const http = require("http");
 const express = require("express");
 
@@ -20,14 +19,6 @@ server.listen(8000, () => {
 });
 
 let __path;
-
-app.get("/run", (req, res) => {
-  let exe = "game.exe";
-  let process = spawn(exe, { cwd: __path });
-  process.on("close", () => {
-    res.status(200).json({ message: path.join(__path, exe) });
-  });
-});
 
 app.get("/setWorkingPath", (req, res) => {
   if (!req.query.path) {

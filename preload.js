@@ -1,4 +1,5 @@
 const { ipcRenderer, contextBridge, shell } = require("electron");
+const path = require("path");
 
 contextBridge.exposeInMainWorld("ipc_namespace", {
   selectFolderPath() {
@@ -11,6 +12,11 @@ contextBridge.exposeInMainWorld("ipc_namespace", {
           reject({ message: "No folder selected." });
         }
       });
+    });
+  },
+  runGame(workingPath) {
+    shell.openExternal(path.join(workingPath, "game.exe"), {
+      workingDirectory: workingPath,
     });
   },
   openURL(url) {

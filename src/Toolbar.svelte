@@ -1,16 +1,35 @@
 <script>
-  import { run } from "./fetch";
   import { _workingPath } from "./stores";
-  import { Folder16, Save16, Run16, Information16 } from "carbon-icons-svelte";
+  import {
+    Folder16,
+    FolderAdd16,
+    FolderOpen16,
+    Save16,
+    Run16,
+    Package16,
+    Information16,
+  } from "carbon-icons-svelte";
   import { Button } from "carbon-components-svelte";
 
-  let projectName = "";
+  export let loadProject;
+
+  let workingPath;
+  let projectName;
+
+  const handleLoadButton = () => {
+    loadProject();
+  };
+
+  const handleRunButton = () => {
+    ipc_namespace.runGame(workingPath);
+  };
 
   const handleInfoButton = () => {
     ipc_namespace.openURL("https://maxhuang.dev");
   };
 
   _workingPath.subscribe((value) => {
+    workingPath = value;
     projectName = value.split("\\").at(-1);
   });
 </script>
@@ -21,17 +40,37 @@
   </div>
   <div>
     <Button
+      iconDescription="Create project"
+      icon={FolderAdd16}
+      kind="ghost"
+      disabled
+    />
+    <Button
+      iconDescription="Open project"
+      icon={FolderOpen16}
+      kind="ghost"
+      on:click={handleLoadButton}
+    />
+    <!-- Action handled by MapCanvas. -->
+    <Button
       id="save-button"
-      iconDescription="Save"
+      iconDescription="Save project"
       icon={Save16}
       kind="ghost"
     />
+  </div>
+  <div>
     <Button
-      id="run-button"
-      iconDescription="Run"
+      iconDescription="Export game"
+      icon={Package16}
+      kind="ghost"
+      disabled
+    />
+    <Button
+      iconDescription="Run game"
       icon={Run16}
       kind="ghost"
-      on:click={run}
+      on:click={handleRunButton}
     />
   </div>
   <div>

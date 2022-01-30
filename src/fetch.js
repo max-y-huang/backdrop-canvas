@@ -17,10 +17,6 @@ const request = (endpoint, params) => {
   });
 };
 
-const run = () => {
-  return request("run", []);
-};
-
 const setWorkingPath = (path) => {
   return request("setWorkingPath", [["path", path]]);
 };
@@ -36,4 +32,4 @@ const saveConfigJSON = (name, data) => {
   ]);
 };
 
-export { run, setWorkingPath, getConfigJSON, saveConfigJSON };
+export { setWorkingPath, getConfigJSON, saveConfigJSON };

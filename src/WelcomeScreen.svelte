@@ -4,8 +4,8 @@
 
   export let loadProject;
 
-  const handleLoadButton = (path) => {
-    loadProject(path);
+  const handleLoadButton = () => {
+    loadProject();
   };
 </script>
 
@@ -14,9 +14,9 @@
     <h1>Welcome to Backdrop!</h1>
     <p>Start creating with one of the options below.</p>
     <div>
-      <Button disabled icon={FolderAdd16}>New project</Button>
+      <Button disabled icon={FolderAdd16}>Create project</Button>
       <Button on:click={handleLoadButton} icon={FolderOpen16}>
-        Load project
+        Open project
       </Button>
     </div>
   </div>

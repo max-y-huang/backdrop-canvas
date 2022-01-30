@@ -13,7 +13,7 @@
 
   let projectLoaded = false;
 
-  const loadProject = async (path) => {
+  const loadProject = async () => {
     try {
       // User select folder path.
       let { path } = await ipc_namespace.selectFolderPath();
@@ -41,7 +41,7 @@
 {:else}
   <div class="wrapper">
     <div class="toolbar-container">
-      <Toolbar />
+      <Toolbar {loadProject} />
     </div>
     <div class="tile-select-container">
       <TileSelect />
