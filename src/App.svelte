@@ -1,7 +1,7 @@
 <script>
   import WelcomeScreen from "./WelcomeScreen.svelte";
   import Toolbar from "./Toolbar.svelte";
-  import TileSelect from "./TileSelect.svelte";
+  import LeftPanel from "./LeftPanel.svelte";
   import MapCanvas from "./MapCanvas.svelte";
   import { setWorkingPath, getConfigJSON } from "./fetch";
   import {
@@ -43,8 +43,8 @@
     <div class="toolbar-container">
       <Toolbar {loadProject} />
     </div>
-    <div class="tile-select-container">
-      <TileSelect />
+    <div class="left-panel-container">
+      <LeftPanel />
     </div>
     <div class="map-canvas-container">
       <MapCanvas />
@@ -61,17 +61,14 @@
     grid-template-columns: auto 1fr;
   }
   .toolbar-container {
-    position: relative;
     grid-row: 1;
     grid-column: 1 / 3;
   }
-  .tile-select-container {
-    position: relative;
+  .left-panel-container {
     grid-row: 2;
     grid-column: 1;
   }
   .map-canvas-container {
-    position: relative;
     grid-row: 2;
     grid-column: 2;
     overflow: hidden;

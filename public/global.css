@@ -28,3 +28,14 @@ body {
 canvas {
   display: block;
 }
+
+.bx--accordion__item {
+  border: none !important;
+}
+.bx--accordion__item::after {
+  display: block;
+  content: "";
+  width: calc(100% - 1.5rem);
+  margin-left: 0.75rem;
+  border-bottom: 2px solid #424242 !important;
+}
