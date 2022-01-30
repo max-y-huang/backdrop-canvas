@@ -1,6 +1,9 @@
-const run = () => {
+const request = (endpoint, params) => {
+  let paramQuery = params
+    .reduce((acc, item) => `${acc}&${item[0]}=${item[1]}`, "")
+    .slice(1); // Remove leading &.
+  let url = `http://localhost:8000/${endpoint}?${paramQuery}`;
   return new Promise(async (resolve, reject) => {
-    let url = `http://localhost:8000/run`;
     try {
       let response = await fetch(url);
       let json = await response.json();
@@ -12,56 +15,25 @@ const run = () => {
       reject({ message: error });
     }
   });
+};
+
+const run = () => {
+  return request("run", []);
 };
 
 const setWorkingPath = (path) => {
-  return new Promise(async (resolve, reject) => {
-    let url = `http://localhost:8000/setWorkingPath?path=${path}`;
-    try {
-      let response = await fetch(url);
-      let json = await response.json();
-      if (!response.ok) {
-        throw json ? json : response.statusText;
-      }
-      resolve(json);
-    } catch (error) {
-      reject({ message: error });
-    }
-  });
+  return request("setWorkingPath", [["path", path]]);
 };
 
 const getConfigJSON = (name) => {
-  return new Promise(async (resolve, reject) => {
-    let url = `http://localhost:8000/getConfigJSON?name=${name}`;
-    try {
-      let response = await fetch(url);
-      let json = await response.json();
-      if (!response.ok) {
-        throw json ? json : response.statusText;
-      }
-      resolve(json);
-    } catch (error) {
-      reject({ message: error });
-    }
-  });
+  return request("getConfigJSON", [["name", name]]);
 };
 
 const saveConfigJSON = (name, data) => {
-  return new Promise(async (resolve, reject) => {
-    let url = `http://localhost:8000/saveConfigJSON?name=${name}&data=${JSON.stringify(
-      data
-    )}`;
-    try {
-      let response = await fetch(url);
-      let json = await response.json();
-      if (!response.ok) {
-        throw json ? json : response.statusText;
-      }
-      resolve(json);
-    } catch (error) {
-      reject({ message: error });
-    }
-  });
+  return request("saveConfigJSON", [
+    ["name", name],
+    ["data", JSON.stringify(data)],
+  ]);
 };
 
 export { run, setWorkingPath, getConfigJSON, saveConfigJSON };
