@@ -1,7 +1,6 @@
 <script>
   import P5 from "p5-svelte";
-  import { selectedTileIndex, _tileImageSrcs, _tilesetData } from "./stores.js";
-  import { run } from "./fetch";
+  import { selectedTileIndex, _tileImageSrcs, _tilesetData } from "./stores";
   import MapData from "./MapData";
 
   let tilesetData;

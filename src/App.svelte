@@ -2,8 +2,10 @@
   import Toolbar from "./Toolbar.svelte";
   import TileSelect from "./TileSelect.svelte";
   import MapCanvas from "./MapCanvas.svelte";
-  import { setWorkingPath, getConfigJSON } from "./fetch.js";
+  import { setWorkingPath, getConfigJSON } from "./fetch";
   import { _workingPath, _tilesetData, _tileImageSrcs } from "./stores";
+  import { FolderOpen16 } from "carbon-icons-svelte";
+  import { Button } from "carbon-components-svelte";
 
   let projectLoaded = false;
 
@@ -29,10 +31,10 @@
 
 {#if !projectLoaded}
   <div class="load-wrapper">
-    <button on:click={handleLoadButton}>
-      <span class="material-icons">folder</span>
+    <Button on:click={handleLoadButton} icon={FolderOpen16}>
+      <!-- <Folder24 /> -->
       Load project
-    </button>
+    </Button>
   </div>
 {:else}
   <div class="wrapper">
@@ -56,16 +58,6 @@
     align-items: center;
     justify-content: center;
   }
-  .load-wrapper > button {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    font-size: 1.5em;
-    padding: 0.2em 0.6em;
-  }
-  .load-wrapper > button > .material-icons {
-    font-size: 1.5em;
-  }
   .wrapper {
     width: 100vw;
     height: 100vh;
@@ -75,15 +67,11 @@
   }
   .toolbar-container {
     position: relative;
-    border-bottom: 2px solid #202020;
-    /* box-shadow: 0 4px 6px #00000015; */
     grid-row: 1;
     grid-column: 1 / 3;
   }
   .tile-select-container {
     position: relative;
-    border-right: 2px solid #202020;
-    /* box-shadow: 4px 0 6px #00000015; */
     grid-row: 2;
     grid-column: 1;
   }

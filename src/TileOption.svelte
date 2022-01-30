@@ -1,7 +1,7 @@
 <script>
   import { _tileImageSrcs } from "./stores";
   import P5 from "p5-svelte";
-  import { selectedTileIndex } from "./stores.js";
+  import { selectedTileIndex } from "./stores";
 
   export let index;
   let selected;
