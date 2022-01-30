@@ -4,7 +4,12 @@
   import TileSelect from "./TileSelect.svelte";
   import MapCanvas from "./MapCanvas.svelte";
   import { setWorkingPath, getConfigJSON } from "./fetch";
-  import { _workingPath, _tilesetData, _tileImageSrcs } from "./stores";
+  import {
+    _workingPath,
+    _tilesetData,
+    _mapData,
+    _tileImageSrcs,
+  } from "./stores";
 
   let projectLoaded = false;
 
@@ -20,6 +25,9 @@
       _tileImageSrcs.set(
         tilesetData.map((data) => path + "/" + data["spritesheetSrc"])
       );
+      // Load map data.
+      let mapData = await getConfigJSON("maps");
+      _mapData.set(mapData);
       // Finish loading project.
       projectLoaded = true;
     } catch (error) {

@@ -1,6 +1,11 @@
 <script>
   import P5 from "p5-svelte";
-  import { selectedTileIndex, _tileImageSrcs, _tilesetData } from "./stores";
+  import {
+    selectedTileIndex,
+    _tileImageSrcs,
+    _tilesetData,
+    _mapData,
+  } from "./stores";
   import MapData from "./MapData";
 
   let tilesetData;
@@ -8,12 +13,13 @@
 
   let mouseOver = false;
 
+  let mapData;
+  let tileImageSrcs;
+
   let mapWidth = 20;
   let mapHeight = 15;
 
   const sketch = (p5) => {
-    let mapData = new MapData(p5, mapWidth, mapHeight);
-
     p5.setup = () => {
       p5.createCanvas(mapWidth * 48, mapHeight * 48);
       p5.noLoop();
@@ -38,7 +44,9 @@
     };
 
     const drawMap = () => {
-      p5.image(mapData.image, 0, 0);
+      if (mapData) {
+        p5.image(mapData.image, 0, 0);
+      }
     };
 
     const drawCursor = () => {
@@ -78,7 +86,16 @@
     };
 
     _tileImageSrcs.subscribe((value) => {
-      mapData.updateTileImages(value);
+      tileImageSrcs = value;
+      if (mapData) {
+        mapData.updateTileImages(tileImageSrcs);
+      }
+    });
+    _mapData.subscribe((value) => {
+      if (value) {
+        mapData = new MapData(p5, value);
+        mapData.updateTileImages(tileImageSrcs);
+      }
     });
   };
 
