@@ -1,15 +1,14 @@
 <script>
+  import WelcomeScreen from "./WelcomeScreen.svelte";
   import Toolbar from "./Toolbar.svelte";
   import TileSelect from "./TileSelect.svelte";
   import MapCanvas from "./MapCanvas.svelte";
   import { setWorkingPath, getConfigJSON } from "./fetch";
   import { _workingPath, _tilesetData, _tileImageSrcs } from "./stores";
-  import { FolderOpen16 } from "carbon-icons-svelte";
-  import { Button } from "carbon-components-svelte";
 
   let projectLoaded = false;
 
-  const handleLoadButton = async (path) => {
+  const loadProject = async (path) => {
     try {
       // User select folder path.
       let { path } = await ipc_namespace.selectFolderPath();
@@ -30,12 +29,7 @@
 </script>
 
 {#if !projectLoaded}
-  <div class="load-wrapper">
-    <Button on:click={handleLoadButton} icon={FolderOpen16}>
-      <!-- <Folder24 /> -->
-      Load project
-    </Button>
-  </div>
+  <WelcomeScreen {loadProject} />
 {:else}
   <div class="wrapper">
     <div class="toolbar-container">
@@ -51,13 +45,6 @@
 {/if}
 
 <style>
-  .load-wrapper {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   .wrapper {
     width: 100vw;
     height: 100vh;

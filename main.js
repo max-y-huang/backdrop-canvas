@@ -32,7 +32,7 @@ function createWindow() {
     })
   );
 
-  win.maximize();
+  // win.maximize();
 
   // Open the DevTools only if app is in development
   // If in production, don't show.
