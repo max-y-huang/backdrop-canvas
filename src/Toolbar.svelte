@@ -1,10 +1,14 @@
 <script>
   import { run } from "./fetch";
   import { _workingPath } from "./stores";
-  import { Folder16, Save16, Run16 } from "carbon-icons-svelte";
+  import { Folder16, Save16, Run16, Information16 } from "carbon-icons-svelte";
   import { Button } from "carbon-components-svelte";
 
   let projectName = "";
+
+  const handleInfoButton = () => {
+    ipc_namespace.openURL("https://maxhuang.dev");
+  };
 
   _workingPath.subscribe((value) => {
     projectName = value.split("\\").at(-1);
@@ -30,12 +34,19 @@
       on:click={run}
     />
   </div>
+  <div>
+    <Button
+      iconDescription="About"
+      icon={Information16}
+      kind="ghost"
+      on:click={handleInfoButton}
+    />
+  </div>
 </div>
 
 <style>
   .wrapper {
     display: flex;
-    align-content: flex-start;
     padding-left: 1em;
     padding-right: 1em;
     gap: 1em;
@@ -46,7 +57,7 @@
     display: flex;
     align-items: center;
   }
-  .wrapper > div::after {
+  .wrapper > div:not(:last-child)::after {
     display: block;
     content: "";
     height: 50%;

@@ -6,6 +6,8 @@
   let tilesetData;
   let selectedIndex;
 
+  let mouseOver = false;
+
   let mapWidth = 20;
   let mapHeight = 15;
 
@@ -35,19 +37,12 @@
       return Math.min(Math.max(val, 0), mapHeight - 1);
     };
 
-    const mouseOver = () => {
-      return (
-        cursorX() == Math.floor(p5.mouseX / 48) &&
-        cursorY() == Math.floor(p5.mouseY / 48)
-      );
-    };
-
     const drawMap = () => {
       p5.image(mapData.image, 0, 0);
     };
 
     const drawCursor = () => {
-      if (mouseOver()) {
+      if (mouseOver) {
         p5.noFill();
         p5.stroke("#ff0000");
         p5.strokeWeight(4);
@@ -57,7 +52,7 @@
 
     const addTileByMouse = () => {
       let tileData = tilesetData[selectedIndex];
-      if (mouseOver()) {
+      if (mouseOver) {
         mapData.addTile({
           x: cursorX(),
           y: cursorY(),
@@ -87,6 +82,13 @@
     });
   };
 
+  const handleMouseenter = () => {
+    mouseOver = true;
+  };
+  const handleMouseleave = () => {
+    mouseOver = false;
+  };
+
   selectedTileIndex.subscribe((value) => {
     selectedIndex = value;
   });
@@ -96,7 +98,9 @@
 </script>
 
 <div class="wrapper">
-  <P5 {sketch} />
+  <div on:mouseenter={handleMouseenter} on:mouseleave={handleMouseleave}>
+    <P5 {sketch} />
+  </div>
 </div>
 
 <style>

@@ -1,4 +1,4 @@
-const { ipcRenderer, contextBridge } = require("electron");
+const { ipcRenderer, contextBridge, shell } = require("electron");
 
 contextBridge.exposeInMainWorld("ipc_namespace", {
   selectFolderPath() {
@@ -12,5 +12,8 @@ contextBridge.exposeInMainWorld("ipc_namespace", {
         }
       });
     });
+  },
+  openURL(url) {
+    shell.openExternal(url);
   },
 });
