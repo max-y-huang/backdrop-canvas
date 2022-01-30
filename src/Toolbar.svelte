@@ -1,5 +1,5 @@
 <script>
-  import { _workingPath } from "./stores";
+  import { _workingPath, _selectedMapCanvasMode } from "./stores";
   import {
     Folder16,
     FolderAdd16,
@@ -7,12 +7,15 @@
     Save16,
     Run16,
     Package16,
+    Map16,
+    Location16,
     Information16,
   } from "carbon-icons-svelte";
   import { Button } from "carbon-components-svelte";
 
   export let loadProject;
 
+  let selectedMapCanvasMode;
   let workingPath;
   let projectName;
 
@@ -31,6 +34,9 @@
   _workingPath.subscribe((value) => {
     workingPath = value;
     projectName = value.split("\\").at(-1);
+  });
+  _selectedMapCanvasMode.subscribe((value) => {
+    selectedMapCanvasMode = value;
   });
 </script>
 
@@ -61,6 +67,23 @@
   </div>
   <div>
     <Button
+      iconDescription="Edit map"
+      icon={Map16}
+      kind="ghost"
+      isSelected={selectedMapCanvasMode === "map"}
+      on:click={() => _selectedMapCanvasMode.set("map")}
+    />
+    <Button
+      iconDescription="Edit events"
+      icon={Location16}
+      kind="ghost"
+      isSelected={selectedMapCanvasMode === "event"}
+      on:click={() => _selectedMapCanvasMode.set("event")}
+      disabled
+    />
+  </div>
+  <div>
+    <Button
       iconDescription="Export game"
       icon={Package16}
       kind="ghost"
@@ -75,7 +98,7 @@
   </div>
   <div>
     <Button
-      iconDescription="About"
+      iconDescription="About Backdrop"
       icon={Information16}
       kind="ghost"
       on:click={handleInfoButton}
@@ -90,7 +113,7 @@
     padding-right: 1em;
     gap: 1em;
     user-select: none;
-    border-bottom: 2px solid #333333;
+    border-bottom: 2px solid #181818;
   }
   .wrapper > div {
     display: flex;

@@ -1,7 +1,7 @@
 <script>
   import P5 from "p5-svelte";
   import {
-    selectedTileIndex,
+    _selectedTileIndex,
     _tileImageSrcs,
     _tilesetData,
     _mapData,
@@ -9,7 +9,7 @@
   import MapData from "./MapData";
 
   let tilesetData;
-  let selectedIndex;
+  let selectedTileIndex;
 
   let mouseOver = false;
 
@@ -59,15 +59,19 @@
     };
 
     const addTileByMouse = () => {
-      let tileData = tilesetData[selectedIndex];
+      let tileData = tilesetData[selectedTileIndex];
       if (mouseOver) {
         mapData.addTile({
           x: cursorX(),
           y: cursorY(),
           layer: tileData["layer"],
-          index: selectedIndex,
+          index: selectedTileIndex,
         });
       }
+    };
+
+    const eraseTileByMouse = () => {
+      mapData.eraseAtPosition(cursorX(), cursorY(), 0);
     };
 
     p5.mouseMoved = () => {
@@ -76,11 +80,15 @@
     p5.mousePressed = () => {
       if (p5.mouseButton === p5.LEFT) {
         addTileByMouse();
+      } else if (p5.mouseButton === p5.RIGHT) {
+        eraseTileByMouse();
       }
     };
     p5.mouseDragged = () => {
       if (p5.mouseButton === p5.LEFT) {
         addTileByMouse();
+      } else if (p5.mouseButton === p5.RIGHT) {
+        eraseTileByMouse();
       }
       p5.redraw();
     };
@@ -106,8 +114,8 @@
     mouseOver = false;
   };
 
-  selectedTileIndex.subscribe((value) => {
-    selectedIndex = value;
+  _selectedTileIndex.subscribe((value) => {
+    selectedTileIndex = value;
   });
   _tilesetData.subscribe((value) => {
     tilesetData = value;

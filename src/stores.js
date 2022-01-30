@@ -5,12 +5,14 @@ const _tilesetData = writable([]);
 const _tileImageSrcs = writable([]);
 const _mapData = writable(undefined);
 
-const selectedTileIndex = writable(0);
+const _selectedTileIndex = writable(0);
+const _selectedMapCanvasMode = writable("map");
 
 export {
   _workingPath,
   _tilesetData,
   _tileImageSrcs,
   _mapData,
-  selectedTileIndex,
+  _selectedTileIndex,
+  _selectedMapCanvasMode,
 };

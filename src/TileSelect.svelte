@@ -26,7 +26,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-right: 2px solid #333333;
+    border-right: 2px solid #181818;
   }
   .wrapper > div {
     height: 0;

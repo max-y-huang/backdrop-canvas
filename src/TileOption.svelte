@@ -1,7 +1,7 @@
 <script>
   import { _tileImageSrcs } from "./stores";
   import P5 from "p5-svelte";
-  import { selectedTileIndex } from "./stores";
+  import { _selectedTileIndex } from "./stores";
 
   export let index;
   let selected;
@@ -27,7 +27,7 @@
     };
   };
 
-  selectedTileIndex.subscribe((value) => {
+  _selectedTileIndex.subscribe((value) => {
     selected = value == index;
   });
   _tileImageSrcs.subscribe((value) => {
@@ -37,7 +37,7 @@
 
 <div class="wrapper">
   <P5 {sketch} />
-  <button on:click={() => selectedTileIndex.set(index)} class:selected />
+  <button on:click={() => _selectedTileIndex.set(index)} class:selected />
 </div>
 
 <style>
