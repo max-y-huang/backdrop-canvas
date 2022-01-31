@@ -1,4 +1,5 @@
 <script>
+  import MapProperties from "./MapProperties.svelte";
   import TileSelect from "./TileSelect.svelte";
   import { Accordion, AccordionItem, Button } from "carbon-components-svelte";
   import { Add16 } from "carbon-icons-svelte";
@@ -8,7 +9,7 @@
   <div>
     <Accordion>
       <AccordionItem title="Map Properties">
-        <p style="color: #909090;">Nothing here, sadly</p>
+        <MapProperties />
       </AccordionItem>
       <AccordionItem title="Map Tiles" open>
         <TileSelect />
@@ -28,11 +29,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-right: 2px solid #181818;
+    border-right: 1px solid #181818;
     overflow-y: scroll;
-  }
-  .wrapper::-webkit-scrollbar {
-    display: none;
   }
   .wrapper > div {
     height: 0;

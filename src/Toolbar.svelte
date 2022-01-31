@@ -113,7 +113,7 @@
     padding-right: 1em;
     gap: 1em;
     user-select: none;
-    border-bottom: 2px solid #181818;
+    border-bottom: 1px solid #181818;
   }
   .wrapper > div {
     display: flex;
@@ -124,6 +124,6 @@
     content: "";
     height: 50%;
     padding-left: 1em;
-    border-right: 2px solid #424242;
+    border-right: 1px solid #424242;
   }
 </style>

@@ -1,4 +1,5 @@
 <script>
+  import "carbon-components-svelte/css/g90.css";
   import WelcomeScreen from "./WelcomeScreen.svelte";
   import Toolbar from "./Toolbar.svelte";
   import LeftPanel from "./LeftPanel.svelte";

@@ -134,4 +134,7 @@
     height: 100%;
     overflow: auto;
   }
+  .wrapper > div {
+    width: fit-content;
+  }
 </style>
