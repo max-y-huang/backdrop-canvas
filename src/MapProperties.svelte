@@ -6,12 +6,16 @@
     TextInput,
     NumberInput,
     Button,
+    ButtonSet,
   } from "carbon-components-svelte";
   import { Checkmark16 } from "carbon-icons-svelte";
 </script>
 
 <div class="wrapper">
   <Form>
+    <FormGroup legendText="ID">
+      <TextInput readonly placeholder="MAP ID" />
+    </FormGroup>
     <FormGroup legendText="Name">
       <TextInput placeholder="E.g. Port Town 1" />
     </FormGroup>
@@ -31,11 +35,9 @@
         />
       </FluidForm>
     </FormGroup>
-    <FormGroup>
-      <Button icon={Checkmark16} style="width: 100%" disabled>
-        Update properties
-      </Button>
-    </FormGroup>
+    <ButtonSet stacked>
+      <Button icon={Checkmark16}>Update properties</Button>
+    </ButtonSet>
   </Form>
 </div>
 

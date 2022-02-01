@@ -1,6 +1,6 @@
 <script>
   import { FolderAdd16, FolderOpen16 } from "carbon-icons-svelte";
-  import { Button } from "carbon-components-svelte";
+  import { Button, ButtonSet } from "carbon-components-svelte";
 
   export let loadProject;
 
@@ -13,12 +13,12 @@
   <div>
     <h1>Welcome to Backdrop!</h1>
     <p>Start creating with one of the options below.</p>
-    <div>
+    <ButtonSet>
       <Button disabled icon={FolderAdd16}>Create project</Button>
       <Button on:click={handleLoadButton} icon={FolderOpen16}>
         Open project
       </Button>
-    </div>
+    </ButtonSet>
   </div>
 </div>
 
@@ -33,7 +33,7 @@
   .wrapper > div {
     display: flex;
     flex-direction: column;
-    gap: 2em;
+    gap: 2rem;
     text-align: center;
   }
 </style>

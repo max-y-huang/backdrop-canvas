@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  outline: none !important;
 }
 
 *::-webkit-scrollbar {
@@ -7,7 +8,7 @@
   height: 6px;
 }
 *::-webkit-scrollbar-track {
-  background: #222222;
+  background: #262626;
 }
 *::-webkit-scrollbar-thumb {
   background-color: #585858;
