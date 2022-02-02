@@ -13,7 +13,7 @@
   <div>
     <h1>Welcome to Backdrop!</h1>
     <p>Start creating with one of the options below.</p>
-    <ButtonSet>
+    <ButtonSet style="justify-content: center;">
       <Button disabled icon={FolderAdd16}>Create project</Button>
       <Button on:click={handleLoadButton} icon={FolderOpen16}>
         Open project
