@@ -71,7 +71,9 @@
     };
 
     const eraseTileByMouse = () => {
-      mapData.eraseAtPosition(cursorX(), cursorY(), 0);
+      if (mouseOver) {
+        mapData.eraseAtPosition(cursorX(), cursorY(), 0);
+      }
     };
 
     p5.mouseMoved = () => {
