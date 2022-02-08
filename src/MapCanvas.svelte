@@ -16,36 +16,54 @@
   let mapData;
   let tileImageSrcs;
 
-  let mapWidth = 20;
-  let mapHeight = 15;
-
   const sketch = (p5) => {
     p5.setup = () => {
-      p5.createCanvas(mapWidth * 48, mapHeight * 48);
+      p5.createCanvas(mapData.width * 48, mapData.height * 48);
       p5.noLoop();
       p5.select("#save-button").mousePressed(async () => {
-        await mapData.save();
+        await mapData.saveTiles();
         console.log("saved!");
+      });
+      p5.select("#update-map-properties-button").mousePressed(() => {
+        let width = parseInt(
+          document.querySelector("#map-properties--width").value
+        );
+        let height = parseInt(
+          document.querySelector("#map-properties--height").value
+        );
+        mapData.resize(width, height);
+        mapData.updateImage();
+        p5.redraw();
       });
     };
 
     p5.draw = () => {
       drawMap();
+      drawGrid();
       drawCursor();
     };
 
     const cursorX = () => {
       let val = Math.floor(p5.mouseX / 48);
-      return Math.min(Math.max(val, 0), mapWidth - 1);
+      return Math.min(Math.max(val, 0), mapData.width - 1);
     };
     const cursorY = () => {
       let val = Math.floor(p5.mouseY / 48);
-      return Math.min(Math.max(val, 0), mapHeight - 1);
+      return Math.min(Math.max(val, 0), mapData.height - 1);
     };
 
     const drawMap = () => {
-      if (mapData) {
-        p5.image(mapData.image, 0, 0);
+      p5.image(mapData.image, 0, 0);
+    };
+
+    const drawGrid = () => {
+      p5.strokeWeight(2);
+      p5.stroke("#00000080");
+      for (let x = 0; x <= mapData.width; x++) {
+        p5.line(48 * x, 0, 48 * x, 48 * mapData.height);
+      }
+      for (let y = 0; y <= mapData.height; y++) {
+        p5.line(0, 48 * y, 48 * mapData.width, 48 * y);
       }
     };
 
@@ -103,6 +121,8 @@
     });
     _mapData.subscribe((value) => {
       if (value) {
+        document.querySelector("#map-properties--width").value = value.width;
+        document.querySelector("#map-properties--height").value = value.height;
         mapData = new MapData(p5, value);
         mapData.updateTileImages(tileImageSrcs);
       }

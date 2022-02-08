@@ -6,11 +6,16 @@ class MapData {
     this.map = {};
     this.p5 = p5;
     let { width, height, tiles } = data;
-    this.width = width;
-    this.height = height;
-    this.image = p5.createGraphics(width * 48, height * 48);
+    this.resize(width, height);
     this.createPlaceholderImage();
     this.loadTiles(tiles);
+  }
+
+  resize(width, height) {
+    this.width = width;
+    this.height = height;
+    this.p5.resizeCanvas(width * 48, height * 48);
+    this.image = this.p5.createGraphics(width * 48, height * 48);
   }
 
   loadTiles(tiles) {
@@ -99,7 +104,7 @@ class MapData {
     this.updateImageAtPosition(x, y);
   }
 
-  save() {
+  saveTiles() {
     let tiles = [];
     Object.entries(this.map).forEach(([y, row]) => {
       Object.entries(row).forEach(([x, col]) => {

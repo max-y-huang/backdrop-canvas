@@ -60,12 +60,12 @@
   on:submit={handleDeleteButton}
 >
   <p style="margin-bottom: 1rem;">Are you sure you want to delete this map?</p>
-  <Tile light>
+  <!-- <Tile light>
     <FluidForm>
       <TextInput readonly labelText="ID" value="123test" />
       <TextInput readonly labelText="Name" value="123test" />
     </FluidForm>
-  </Tile>
+  </Tile> -->
 </Modal>
 
 <style>
